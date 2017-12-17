@@ -14,15 +14,15 @@ const short mikrofonPin = A0;
 const short orneklemeSayisi = 50; // 50ms = 20Hz 'lik bir örnekleme yapar. Yani 50 ms boyunca mikrofondan veri toplar ve analiz eder.
 const unsigned long degisimSuresi = 10000; // 10000ms yani 10 sn. İsim bilgileri 10 saniyede bir değişsin
 const unsigned long ekranBeklemeSuresi = 40000; // 40 saniye
-const unsigned int ekranIsigiAcmaFarki = 10;
+const unsigned int ekranIsigiAcmaFarki = 10; // ses farkı ne kadar olursa ekran açılsın. Gürültülü ortamlarda bu değeri yükseltmek gerekir.
 
-unsigned long oncekiDegisimZamani = 0;
-unsigned long isikAcilmaZamani = 0;
-unsigned int sesDuzeyi;
+unsigned long oncekiDegisimZamani = 0; // Ekranın bir önceki değişim zamanı
+unsigned long isikAcilmaZamani = 0; // ışığın bir önceki değişim zamanı
+unsigned int sesDuzeyi; // ses düzeyini tutan değişken.
 short durum = 0; // 0 - İsim, 1 - Proje Adı, 2 - Tübitak Bilgisi
+bool ekranAcikmi = true; // ekranın açık olup olmadığı değerini tutuyor.
 
-bool ekranAcikmi = true;
-
+// LCD için özel karakter. LCD de bir alanı tamamen dolduruyor. Ses düzeyini göstermek için.
 byte tamDolu[8] = {
   0b11111,
   0b11111,
@@ -36,8 +36,7 @@ byte tamDolu[8] = {
 
 
 void setup() {
-  
-  // Hata ayıklama özelliğini duruma göre aç
+  // Hata ayıklama özelliğini aç
   Serial.begin(9600);
   // Ekranı başlat
   lcd.init();
@@ -59,17 +58,22 @@ void setup() {
 
 void loop() {
   // Ekran ışığını kontrol et!
-  isikKontrol();
+  isikKontrol(); // aşağıdaki aynı adlı fonksiyonu inceleyin.
   // Ekrana İsimleri Bas
-  isimYaz();
+  isimYaz(); // aşağıdaki aynı adlı fonksiyonu inceleyin.
   // Ses Düzeyini Yaz
-  sesDuzeyiniYaz();
+  sesDuzeyiniYaz(); // aşağıdaki aynı adlı fonksiyonu inceleyin.
 }
 
 void isikKontrol() {
+  // millis() fonksiyonu, arduino açıldıktan şimdiye kadar geçen süreyi milisaniye cinsinden bize geri verir. delay yerine iki millis arasındaki
+  // farka bakarak ne kadar zaman geçtiğini anlayabilir ve istediğimiz değeri aştığında işlem yap deyebiliriz.
+  // delaydan farkı delaydaki gibi işlemleri durdurmaz.
+  // && ve anlamına gelir.
   if((millis() - isikAcilmaZamani) > ekranBeklemeSuresi && ekranAcikmi == true) {
-    lcd.noBacklight();
-    lcd.noDisplay();
+    lcd.noBacklight(); // ekran ışığını kapat
+    lcd.noDisplay(); // ekran görüntüsünü kapat.
+    // yukarıdaki iki lcd komutu pil tasarrufu için kullanılacak!
     ekranAcikmi = false;
   }
 }
@@ -77,8 +81,8 @@ void isikKontrol() {
 void isimYaz() {
   if(millis() - oncekiDegisimZamani > degisimSuresi) {
     if(durum == 0) {
-      // yaz(); fonksiyonu verilen metni düzenleyip yazar!
-      yaz(F("Erdem Arslan"));
+      // yaz(); fonksiyonu verilen metni düzenleyip yazar! Bu fonksiyonu biz yazdık.
+      yaz(F("Erdem Arslan")); // Bir stringi (metni) F() içinde yazarsak, bu metin hafızada tutulmaz. böylelikle ram bellek boş yere dolmaz.
     }
     else if(durum == 1) {
       yaz(F("Proje Yurutucusu"));
@@ -98,6 +102,7 @@ void isimYaz() {
 void yaz(String metin) {
   lcd.setCursor(0,0);
   lcd.print("                ");
+  // Aşağıda yaptığımız işlem metni ortaya yazdırmak içindi. metnin uzunluğunu bul, 16 dan çıkart, kalanı 2 ye böl ve çıkan sayı kadar imleci sağa al ve yazmaya başla
   int cikarma = 16 - metin.length();
   int baslama = cikarma % 2 == 0 ? (cikarma / 2) : ((cikarma + 1) / 2);
   lcd.setCursor(baslama, 0);
@@ -148,7 +153,7 @@ void farkiEkranaBas(int fark) {
   for(int i = 0; i < 16; i++) {
     lcd.setCursor(i,1);
     if(i <= fark) {
-      lcd.write((uint8_t)0);
+      lcd.write((uint8_t)0); // özel karakterler yazdırılırken print yerine write komutu kullanılır.
       //lcd.print("*");
     } else {
       lcd.print(" ");
