@@ -3,6 +3,17 @@
  * Her 10 saniyede bir bilgiler değişir
  * 2. Satırda ise ses seviyesi verilir.
  * 
+ * BAĞLANTI ŞEMASI
+ * LCD I2C Ekran
+ * 5V -> Arduino 5V
+ * GND -> Arduino GND
+ * SDA -> Arduino A4
+ * SCL -> Arduino A5
+ *
+ * Ses Tanıma Modülü
+ * A0 -> Arduino A0
+ * G -> Arduino GND
+ * + -> Arduino 5V
  */
 
 #include <LiquidCrystal_I2C.h>
