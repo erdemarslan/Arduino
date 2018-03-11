@@ -1,3 +1,14 @@
+/*
+ * Şarj Otomatı 4 Kanal Röle
+ * v.1.2
+ * 
+ * Erdem Arslan
+ * http://www.erdemarslan.com/
+ * Her hakkı saklıdır.
+ * GPL v.2.0
+ * 
+ */
+
 #include <LiquidCrystal_I2C.h>
 
 LiquidCrystal_I2C lcd(0x3F, 20,4);
