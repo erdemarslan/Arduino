@@ -308,8 +308,9 @@ void EkranGoster() {
   }
 
   if(ekranModu == 1) {
-    lcd.clear();
+    
     if(millis() - sonSaniyeGosterimi > 1000) {
+      lcd.clear();
       long kalansure1 = role_1_Acikmi == true ? role_1_bitmeSuresi - millis() : 0;
       long kalansure2 = role_2_Acikmi == true ? role_2_bitmeSuresi - millis() : 0;
       long kalansure3 = role_3_Acikmi == true ? role_3_bitmeSuresi - millis() : 0;
