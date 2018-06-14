@@ -151,10 +151,10 @@ void setup() {
 
   Serial.println(F("Printer baslatildi!"));
   
-  pinMode(2, INPUT);
-  pinMode(3, INPUT);
-  pinMode(10, OUTPUT); // 10-relayPin
-  pinMode(13, OUTPUT); // 13 - buzzerPin
+  pinMode(2, INPUT); // Coin Acceptor interrupt pini
+  pinMode(3, INPUT); // Buton pini
+  pinMode(10, OUTPUT); // 10-relayPin - Röle pini, para makinesini kapatıp açıyor.
+  pinMode(13, OUTPUT); // 13 - buzzerPin - Buzzer pini
 
   Serial.println(F("G/C Tamamlandi!"));
 
