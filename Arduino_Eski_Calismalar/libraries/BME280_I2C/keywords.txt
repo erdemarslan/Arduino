@@ -1,0 +1,21 @@
+#######################################
+# Syntax Coloring Map For BME280_I2C
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+BME280_I2C	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+begin					        KEYWORD2 
+setTempCa			        KEYWORD2
+readSensor		        KEYWORD2
+getTemperature_C			KEYWORD2
+getTemperature_F			KEYWORD2
+getHumidity			      KEYWORD2
+getPressure_HP				KEYWORD2
+getPressure_MB			  KEYWORD2
