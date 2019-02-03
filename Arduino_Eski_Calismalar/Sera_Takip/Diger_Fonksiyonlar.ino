@@ -1,11 +1,9 @@
 // sensor bilgilerini okur
 void Sensor_Oku() {
-  //Sensor.readSensor();
-  sicaklik = Sensor.temp();
-  nem = Sensor.hum();
-  basinc = Sensor.pres();
+  BME280::TempUnit tempUnit(BME280::TempUnit_Celsius);
+  BME280::PresUnit presUnit(BME280::PresUnit_hPa);
+  Sensor.read(basinc, sicaklik, nem, tempUnit, presUnit);
   zaman_SonSensorOkuma = millis();
-
   Sensor_Kontrol();
 }
 

@@ -17,7 +17,7 @@ float ustSicaklik, altSicaklik, tempSicaklik, sicaklik, nem, basinc;
 int mesajNo, gosterilenEkran;
 String _data, ip, operator_adi;
 unsigned long zaman_SonSensorOkuma, zaman_SonEkranGuncelleme, zaman_SonHTTPIstek, zaman_SonIslem, zaman;
-char mesaj[90];
+char mesaj[160];
 
 const String TelNo PROGMEM = "+905321130193";
 
@@ -64,7 +64,7 @@ byte sinir[8] = {
   0b00001
 };
 void setup() {
-  _data.reserve(255);
+  _data.reserve(500);
   devam = false;
   mesajVar = false;
   mesajNo = 0;
@@ -95,7 +95,6 @@ void setup() {
   Ekran_Baslangic_Bilgi_Yaz("Ayarlar", "Aliniyor", 1000);
   ustSicaklik = 50.00;
   altSicaklik = 0.00;
-  tempSicaklik = -2.00;
 
   // Sıcaklık Nem Basınç Sensörü başlatılıyor!
   Ekran_Baslangic_Bilgi_Yaz("Sensor", "Baslatiliyor", 1000);
@@ -191,11 +190,11 @@ void setup() {
   Sensor_Oku();
   Serial.println(F("Sensor okundu..."));
   Serial.print("Sicaklik: ");
-    Serial.println(sicaklik);
-    Serial.print("Nem: ");
-    Serial.println(nem);
-    Serial.print("Basinc: ");
-    Serial.println(basinc);
+  Serial.println(sicaklik);
+  Serial.print("Nem: ");
+  Serial.println(nem);
+  Serial.print("Basinc: ");
+  Serial.println(basinc);
 
   // Operatörü oku
   operatorAdi();

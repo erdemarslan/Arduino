@@ -20,6 +20,7 @@ void waitOK() {
 // interneti kontrol eder!
 bool internetVarmi() {
   devam = false;
+  bool iv = false;
   Serial1.print(F("AT+SAPBR=2,1\r"));
   //delay(100);
   zaman = millis();
@@ -30,12 +31,12 @@ bool internetVarmi() {
 
       if (_data.indexOf("ERR") != -1 || _data.indexOf("\"0.0.0.0\"") != -1) {
         internetDurum = false;
-        return false;
+        iv = false;
       }
       else {
         ip = _data.substring(_data.indexOf(",\"")+2, _data.lastIndexOf("\""));
         internetDurum = true;
-        return true;
+        iv = true;
       }
     }
 
@@ -44,6 +45,8 @@ bool internetVarmi() {
       devam = true;
     }
   }
+
+  return iv;
 }
 // Operatörü okur!
 void operatorAdi() {
@@ -91,7 +94,7 @@ bool mesajGonder(String numara, String mesaj) {
 
 bool Sensor_Degerlerini_Internete_Gonder() {
   zaman_SonHTTPIstek = millis();
-  String url = "iot.robothane.net/sera.php?T=ERA17WQ8FCK78N1TR&S=";
+  String url = "iot.robothane.net/sera.php?T=BIHO_CAN_YARISMA&S=";
   url += String(sicaklik);
   url += "&N=";
   url += String(nem);
