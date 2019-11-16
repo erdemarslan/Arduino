@@ -154,14 +154,13 @@ void Internete_Veri_Gonder() {
   if(Internet_Baglimi) {
     Log(F("Veriler internete gonderiliyor..."));
 
-    String url = "iot.robothane.net/sera.php?T=";
+    String url = "sera.erdemarslan.com/sera.php?T=";
     url += API_TOKEN;
     url += "&S=";
     url += String(Sicaklik);
     url += "&N=";
     url += String(Nem);
-    url +="&B=";
-    url += String(Basinc);
+    url +="&US=50.0&AS=0.0&D=0";
     url += "&ST=1&K=GSM&KID=";
     url += API_ID;
 

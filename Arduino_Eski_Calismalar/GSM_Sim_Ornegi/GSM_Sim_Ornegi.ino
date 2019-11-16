@@ -1,11 +1,12 @@
-//#include <SoftwareSerial.h>
+#include <SoftwareSerial.h>
 
 //Serial1 sim;
+SoftwareSerial gsm(10,11);
 
 void setup() {
   // put your setup code here, to run once:
-  Serial1.begin(9600); // RX 7 - TX 8
-  Serial.begin(9600);
+  gsm.begin(57600); // RX 7 - TX 8
+  Serial.begin(57600);
   //Serial.println("Sim baslatildi!");
   
   //Serial.println(sim.smsTextMode(true));
@@ -47,12 +48,12 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   if(Serial.available()) {
-    Serial1.write(Serial.read());
+    gsm.write(Serial.read());
   }
 
-  if(Serial1.available()) {
+  if(gsm.available()) {
     Serial.println("#####");
-    Serial.write(Serial1.read());
+    Serial.write(gsm.read());
   }
   
 }

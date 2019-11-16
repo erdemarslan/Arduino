@@ -10,13 +10,13 @@ BME280_I2C sensor;
 LiquidCrystal_I2C lcd(0x3F, 16,2);
 
 // Gsm Modülü
-SoftwareSerial gsm(7,8);
+SoftwareSerial gsm(10,11);
 
 bool DEBUG = true;
-int LED_OPERATOR = 4;
-int LED_GPRS = 5;
-int LED_ISLEM = 6;
-int GSM_RESET_PIN = 9;
+int LED_OPERATOR = 5;
+int LED_GPRS = 6;
+int LED_ISLEM = 7;
+int GSM_RESET_PIN = 4;
 
 
 // Değişkenler
@@ -29,7 +29,7 @@ unsigned long Son_Sensor_Okuma, Son_Ekran_Guncelleme, Son_HTTP_Istek, Son_Islem,
 
 // Sabitler
 const String TelNo PROGMEM = "+905321130193";
-const String API_TOKEN PROGMEM = "ERA17WQ8FCK78N1TR";
+const String API_TOKEN PROGMEM = "ERA-BIHO-0001-TR";
 const String API_ID PROGMEM = "351504008191195"; // Cihazın imei ve ya mac numarası yazılabilir! Önceden alınırsa programa ek yük bindirmez
 
 // Grafikler

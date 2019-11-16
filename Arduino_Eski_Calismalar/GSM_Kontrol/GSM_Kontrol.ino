@@ -9,7 +9,7 @@
  */
 #include <SoftwareSerial.h>
 
-SoftwareSerial gsm(7,8);
+SoftwareSerial gsm(10,11);
 const int ledKirmizi = 4;
 const int ledYesil = 5;
 const int ledMavi = 6;
@@ -119,4 +119,3 @@ int bekle(String istenilen, String hatali, int bekleme) {
 void Log(String metin) {
   Serial.println(metin);
 }
-
